@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 
 export default class MainSidebar extends Component {
  
@@ -14,9 +15,9 @@ export default class MainSidebar extends Component {
           {folders.map((folder, i) => {
             return (
               <li className='main-folder-list' key={i}>
-                <a href={`/folder/${folder.id}`}> 
+                <NavLink to={`/folder/${folder.id}`} activeClassName='selectedFolder'> 
                 {folder.name}
-                </a>
+                </NavLink>
               </li>
             )
           })}

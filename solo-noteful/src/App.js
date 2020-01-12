@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import MainMain from './MainMain';
 import MainSidebar from './MainSidebar';
 import FolderMain from './FolderMain';
@@ -133,7 +133,7 @@ class App extends Component {
   render () {
     return (
       <>
-      <h1>Noteful</h1>
+      <h1><Link to='/' className='noteful-header' >Noteful</Link></h1>
       <div className='main-view'>
         
 

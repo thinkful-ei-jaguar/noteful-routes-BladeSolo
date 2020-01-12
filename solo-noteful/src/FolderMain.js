@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+
 
 export default class FolderMain extends Component {
  
@@ -17,7 +18,7 @@ export default class FolderMain extends Component {
             {theseNotes.map((note, i) => {
               return (
                 <li className='main-note-list' key={i}>
-                  <a href={`../../note/${note.id}`}>{note.name}</a>
+                  <Link to={`../../note/${note.id}`}>{note.name}</Link>
                   <p>Last modified: {note.modified.slice(0, 10)}</p>
                   <button className='main-note-delete'>Delete Note</button>
                 </li>

@@ -42,3 +42,12 @@ main {
 .main-note-delete {
   max-width: 150px;
 }
+
+.selectedFolder {
+  background-color: burlywood;
+  width: 100%;
+}
+
+.noteful-header {
+  text-decoration: none;
+}

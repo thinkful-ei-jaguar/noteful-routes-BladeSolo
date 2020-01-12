@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link, NavLink } from 'react-router-dom'
 
 export default class NoteSidebar extends Component {
  
@@ -6,22 +7,17 @@ export default class NoteSidebar extends Component {
 
   render() {
     
-    const { folders } = this.props.state;
+    const currentNoteId = this.props.match.params.noteid;
+    const currentNoteFolder = this.props.state.notes.find(note => note.id === currentNoteId).folderId;
+    const displayFolder = this.props.state.folders.find(folder => folder.id === currentNoteFolder).name;
+  
     return (
       <div className='main-sidebar-div'>
-        <div className='main-view-sidebar'>
+        <div className='app-sidebar'>
         <ul>
-          {folders.map((folder, i) => {
-            return (
-              <li className='main-folder-list' key={i}>
-                <a href={`/folder/${folder.id}`}> 
-                {folder.name}
-                </a>
-              </li>
-            )
-          })}
+          <li>{displayFolder}</li>
         </ul>
-        <button>Add folder</button>
+        <button><Link to={`/folder/${currentNoteFolder}`}>Go Back</Link></button>
         </div>
       </div>
     )
