@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+import MainMain from './MainMain';
+import MainSidebar from './MainSidebar';
+import FolderMain from './FolderMain';
+import FolderSidebar from './FolderSidebar';
+import NoteMain from './NoteMain';
+import NoteSidebar from './NoteSidebar';
 import './App.css';
 
-class App extends React.Component {
+class App extends Component {
   constructor (props) {
     super(props);
     this.state = {
@@ -125,9 +132,45 @@ class App extends React.Component {
   
   render () {
     return (
+      <>
       <h1>Noteful</h1>
-      
-    
+      <div className='main-view'>
+        
+
+        <div className='app-sidebar'>
+          <Route exact path='/' render={() => {
+            return <MainSidebar state={this.state} />
+          }} 
+          /> 
+          <Route path='/folder/:folderid' render={props => 
+            
+            <FolderSidebar {...props} state={this.state}  />
+          } 
+          /> 
+          <Route path='/note/:noteid' render={(props) => {
+            return <NoteSidebar {...props} state={this.state} />
+          }} 
+          /> 
+
+        </div>
+
+        <main className='app-main'>
+          <Route exact path='/' render={() => {
+            return <MainMain state={this.state} />
+          }} 
+          /> 
+          <Route path='/folder/:folderid' render={(props) => {
+            return <FolderMain {...props} state={this.state} />
+          }} 
+          /> 
+          <Route path='/note/:noteid' render={(props) => {
+            return <NoteMain {...props} state={this.state} />
+          }} 
+          />
+        </main>
+
+      </div>
+      </>
     );
   }
 }
