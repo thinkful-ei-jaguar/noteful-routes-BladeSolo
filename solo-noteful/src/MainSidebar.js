@@ -4,6 +4,7 @@ import NotefulContext from './NotefulContext'
 
 export default class MainSidebar extends Component {
   static contextType = NotefulContext;
+  
   render() {
     
     const { folders } = this.context;
