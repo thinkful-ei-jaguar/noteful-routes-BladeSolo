@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import NotefulContext from './NotefulContext'
 
 export default class MainView extends Component {
- 
+  static contextType = NotefulContext;
 
 
   render() {
     
-    const { notes } = this.props.state;
+    const { notes } = this.context;
     return (
       <div className="main-main-div">
 

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-
+import NotefulContext from './NotefulContext'
 export default class NoteMain extends Component {
- 
+  static contextType = NotefulContext;
 
 
   render() {
     
-    const { notes } = this.props.state;
+    const { notes } = this.context;
     const thisNote = notes.filter (note => note.id === this.props.match.params.noteid)
     return (
       <div className="main-main-div">

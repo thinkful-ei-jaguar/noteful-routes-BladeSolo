@@ -1,17 +1,18 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-
+import NotefulContext from './NotefulContext'
 
 export default class FolderMain extends Component {
- 
-
+  static contextType = NotefulContext;
 
   render() {
     
-    const { notes } = this.props.state;
+    const { notes } = this.context;
     const { folderid } = this.props.match.params;
+    
     const theseNotes = notes.filter(note => note.folderId === folderid)
     return (
+      
       <div className="main-main-div">
 
           <ul className='main-view-main'>

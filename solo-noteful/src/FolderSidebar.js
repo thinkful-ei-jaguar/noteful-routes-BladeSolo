@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-
+import NotefulContext from './NotefulContext'
 export default class FolderSidebar extends Component {
- 
-
+  static contextType = NotefulContext;
 
   render() {
     
-    const { folders } = this.props.state;
+    const { folders } = this.context;
     
     return (
       <div className='main-sidebar-div'>
