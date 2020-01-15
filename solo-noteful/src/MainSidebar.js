@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import NotefulContext from './NotefulContext'
 
 export default class MainSidebar extends Component {
   static contextType = NotefulContext;
-  
+
   render() {
     
     const { folders } = this.context;
@@ -22,7 +22,11 @@ export default class MainSidebar extends Component {
             )
           })}
         </ul>
-        <button>Add folder</button>
+        <button>
+          <Link to={`/create-folder`}>
+            Add folder
+          </Link>
+        </button>
         </div>
       </div>
     )

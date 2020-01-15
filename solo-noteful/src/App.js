@@ -8,6 +8,8 @@ import NoteMain from './NoteMain';
 import NoteSidebar from './NoteSidebar';
 import './App.css';
 import NotefulContext from './NotefulContext';
+import AddFolder from './AddFolder';
+import AddNote from './AddNote';
 
 
 
@@ -27,12 +29,19 @@ class App extends Component {
       notes: updatedNotes
     })
   }
+
+  // addFolder = () => {
+  //   console.log('added folder');
+  //   const updatedFolders = this.state.folders.map(folder => folder)
+  //   return this.setState({
+  //     folders: updatedFolders
+  //   })
+  // }
   
   componentDidMount() {
     fetch('http://localhost:9090/folders')
       .then(response => response.json())
       .then(newFolders => {
-        console.log(newFolders)
         return this.setState({
           folders: newFolders
         })
@@ -54,6 +63,8 @@ class App extends Component {
       folders: this.state.folders,
       notes: this.state.notes,
       deleteNote: this.deleteNote,
+      addFolder: this.addFolder, 
+      addNote: this.addNote
     }
     return (
       <>
@@ -67,7 +78,11 @@ class App extends Component {
             <Route path='/folder/:folderid' component={FolderSidebar} 
             /> 
             <Route path='/note/:noteid' component={NoteSidebar} 
-            /> 
+            />
+            <Route exact path ='/create-folder' component={MainSidebar}
+            />
+            <Route exact path ='/create-note' component={MainSidebar}
+            />
           </div>
 
           <main className='app-main'>
@@ -76,6 +91,10 @@ class App extends Component {
             <Route path='/folder/:folderid' component={FolderMain} 
             /> 
             <Route path='/note/:noteid' component={NoteMain}
+            />
+            <Route exact path ='/create-folder' component={AddFolder}
+            />
+            <Route exact path ='/create-note' component={AddNote}
             />
           </main>
         </NotefulContext.Provider>

@@ -61,8 +61,6 @@ export default class NoteMain extends Component {
               )
             })}
           </ul>
-          <button>Add note</button>
-
       </div>
     )
   }

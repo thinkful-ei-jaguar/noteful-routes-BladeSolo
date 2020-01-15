@@ -57,7 +57,7 @@ export default class MainView extends Component {
               )
             })}
           </ul>
-          <button>Add note</button>
+          <Link to="./create-note"><button>Add note</button></Link>
 
       </div>
     )
