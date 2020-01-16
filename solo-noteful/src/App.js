@@ -9,7 +9,9 @@ import NoteSidebar from './NoteSidebar';
 import './App.css';
 import NotefulContext from './NotefulContext';
 import AddFolder from './AddFolder';
+import AddFolderSidebar from './AddFolderSidebar';
 import AddNote from './AddNote';
+import ErrorBoundary from './ErrorBoundary';
 
 
 
@@ -30,13 +32,15 @@ class App extends Component {
     })
   }
 
-  // addFolder = () => {
-  //   console.log('added folder');
-  //   const updatedFolders = this.state.folders.map(folder => folder)
-  //   return this.setState({
-  //     folders: updatedFolders
-  //   })
-  // }
+  addFolder = () => {
+    fetch('http://localhost:9090/folders')
+      .then(response => response.json())
+      .then(newFolders => {
+        return this.setState({
+          folders: newFolders
+        })
+      });
+  }
   
   componentDidMount() {
     fetch('http://localhost:9090/folders')
@@ -70,7 +74,7 @@ class App extends Component {
       <>
       <h1><Link to='/' className='noteful-header'>Noteful</Link></h1>
       <div className='main-view'>
-        
+        <ErrorBoundary>
         <NotefulContext.Provider value={contextValue}>
           <div className='app-sidebar'>
             <Route exact path='/' component={MainSidebar} 
@@ -79,12 +83,12 @@ class App extends Component {
             /> 
             <Route path='/note/:noteid' component={NoteSidebar} 
             />
-            <Route exact path ='/create-folder' component={MainSidebar}
+            <Route exact path ='/create-folder' component={AddFolderSidebar}
             />
             <Route exact path ='/create-note' component={MainSidebar}
             />
           </div>
-
+        
           <main className='app-main'>
             <Route exact path='/' component={MainMain}
             /> 
@@ -97,7 +101,9 @@ class App extends Component {
             <Route exact path ='/create-note' component={AddNote}
             />
           </main>
+          
         </NotefulContext.Provider>
+        </ErrorBoundary>
       </div>
       </>
     );

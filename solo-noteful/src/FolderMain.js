@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import NotefulContext from './NotefulContext'
+import PropTypes from 'prop-types'
 
 function deleteBookmarkRequest(noteId, callback) {
   fetch(`http://localhost:9090/notes/${noteId}`, {
@@ -31,6 +32,7 @@ function deleteBookmarkRequest(noteId, callback) {
 
 export default class FolderMain extends Component {
   static contextType = NotefulContext;
+  
 
   render() {
     
@@ -61,9 +63,17 @@ export default class FolderMain extends Component {
               )
             })}
           </ul>
-          <button>Add note</button>
+          <Link to="/create-note"><button>Add note</button></Link>
 
       </div>
     )
   }
 }
+
+FolderMain.propTypes = { 
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      folderid: PropTypes.string.isRequired
+    })
+
+})}

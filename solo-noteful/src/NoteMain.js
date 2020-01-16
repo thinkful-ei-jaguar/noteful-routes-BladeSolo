@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NotefulContext from './NotefulContext'
+import PropTypes from 'prop-types'
 
 function deleteBookmarkRequest(noteId, callback) {
   fetch(`http://localhost:9090/notes/${noteId}`, {
@@ -65,3 +66,11 @@ export default class NoteMain extends Component {
     )
   }
 }
+
+NoteMain.propTypes = { 
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      noteid: PropTypes.string.isRequired
+    })
+
+})}

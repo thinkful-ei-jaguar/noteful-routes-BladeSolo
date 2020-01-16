@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import notefulContext from './NotefulContext'
 import ValidationError from './ValidationError';
+import ErrorMessage from './ErrorMessage';
+import { Link } from 'react-router-dom';
 
 
 
@@ -31,12 +33,23 @@ export default class AddNote extends Component {
 
       content: {
         value: ''
+      },
+
+      error: {
+        value: ''
+      },
+
+      success: {
+        value: false
       }
-      
+
     }
   }
 
   addNewNote(note) {
+    this.setState({
+      error: {value: ''}
+    })
     fetch(`http://localhost:9090/notes/`, {
       method: 'POST',
       headers: {
@@ -53,14 +66,22 @@ export default class AddNote extends Component {
             throw error
           })
         }
-        return res.json()
+        this.setState({
+          success: {value: true}
+        })
+        return res.json();
       })
-      .catch(error => {
-        console.error(error)
+      .catch(err => {
+        this.setState({
+          error: {value: err.message},
+          success: {value: false}
+        })
+        console.log(err.message)
       })
   }
 
   handleNewNote (event) {
+    event.preventDefault();
     const newNote = JSON.stringify({
       id: this.state.id.value,
       name: this.state.name.value,
@@ -119,6 +140,9 @@ export default class AddNote extends Component {
         
         <button disabled={this.validateName()}>Create Note</button>
         {this.state.name.touched && (<ValidationError message={this.validateName()} />)}
+        {this.state.error.value !== '' && <ErrorMessage props={this.state.error.value} />}
+        {(this.state.error.value === '' && this.state.success.value === true) && <p>Successfully submitted new "{this.state.name.value}" note!</p>}
+        <Link to="/"><button>Home Page</button></Link>
       </form>
     )
   }

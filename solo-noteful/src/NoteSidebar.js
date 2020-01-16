@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { Link  } from 'react-router-dom'
 import NotefulContext from './NotefulContext'
+import PropTypes from 'prop-types'
 export default class NoteSidebar extends Component {
   static contextType = NotefulContext;
-
+  
   render() {
+    let currentNoteId = this.props.match.params.noteid;
     
-    const currentNoteId = this.props.match.params.noteid;
-    const currentNoteFolder = this.context.notes.find(note => note.id === currentNoteId).folderId;
-    const displayFolder = this.context.folders.find(folder => folder.id === currentNoteFolder).name;
+    let currentNoteFolder = this.context.notes.find(note => note.id === currentNoteId).folderId;
+    let displayFolder = this.context.folders.find(folder => folder.id === currentNoteFolder).name;
+    
   
     return (
       <div className='main-sidebar-div'>
@@ -22,3 +24,11 @@ export default class NoteSidebar extends Component {
     )
   }
 }
+
+NoteSidebar.propTypes = { 
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      noteid: PropTypes.string.isRequired
+    })
+
+})}
